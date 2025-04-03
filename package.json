@@ -1,0 +1,22 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Learn Node JS and Create Rest API",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc -w",
+    "dev": "npx nodemon",
+    "build": "tsc"
+  },
+  "author": "Reza Aditama",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  }
+}

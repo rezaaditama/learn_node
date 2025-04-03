@@ -1,0 +1,99 @@
+Instalasi Node JS dan GIT (version control system untuk mengelola source code yang dibuat)
+
+
+inisialisasi project menggunakan node js
+npm init
+
+instalasi typescript
+npm i -D typescript ts-node => perintah ini digunakan untuk melakukan instalasi typescript agar dapat berjalan pada tahap development bukan saat di build dan berjalan di production
+
+Membuat konfigurasi typescript
+npx tsc --init => hasilnya akan membuat file tsconfig.json
+
+kalau tidak dapat melakukan npx maka dibuat manual kemudian tambahkan :
+1. target (es2016) => mengatur versi dari Bahasa javascript
+2. module (commonjs)
+3. esModuleInterop (true)
+4. noImpliciyAny (true)
+5. moduleResolution (node)
+6. resolveJsonModule (true) => memungkinkan untuk mengimport file json
+7. sourceMap (true)
+8. outDir => out directory (mengarahkannya kemana)
+9. baseURL
+10. paths
+11. typeRoots
+
+kemudian tambahkan include (untuk memilih dimana saja menggunakan typescript) dan exclude (file yang tidak akan menggunakan typescript)
+
+buat folder src dan buat file index.ts (file ini akan diakses/dieksekusi)
+
+buat script untuk menjalankan perintah pada terminal untuk menjalankan projek
+"start" : "npm tsc -w" => Ketika projek telah selesai di build
+"dev" : "npx nodemon" => menjalankan nodemon
+"build" : "tsc"
+
+Lakukan instalasi nodemon
+npm i nodemon
+
+Buat file konfigurasi berupa object dengan nama nodemmon.json
+{
+"watch" : ["src"],
+"ext": "ts",
+"exec" : "npx ts-node ./src/index.ts"
+}  
+
+jadi Ketika memasukkan perintah dev maka akan membuka file nodemon.json kemudian nodemon akan langsung menjalankan perintah npx ts-node ./src/index.ts maka akan secara otomatis menjalankan file yang ada pada index.ts
+
+lakukan instalasi framework express.js => memiliki fitur yang dapat mempermudah dalam mengembangkan web atau mobile application  (singkatnya untuk membuat sebuah rest API)
+npm i express
+
+dikarenakan kita menggunakan express dan typrscript maka dibutuhkan library @types/express agar express dapat langsung suporrt dengan typescript (jadi agar dapat berjalan maka biasanya diperlukan sebuah dependensi dengan cara :
+diawali dengan @types/(nama library)
+)
+npm i -D @types/express
+
+
+import library pada nodejs (const express = require("express")), namun dikarenakan menggunakan typescript maka cukup import seperti biasa (pada react)
+
+
+(buat konfigurasi setup server)
+
+lakukan instalasi postman (tools untuk melakukan request ke API)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
