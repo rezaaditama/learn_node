@@ -1,7 +1,7 @@
 #file ini digunakan agar ketika project disimpan disebuah repository, file-file yang ada disini akan dikecualikan
 
 #Dependencies
-/node_module
+/node_modules
 
 #Testing
 /coverage
