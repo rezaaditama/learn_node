@@ -1,4 +1,4 @@
-Instalasi Node JS dan GIT (version control system untuk mengelola source code yang dibuat)
+INSTALASI NODE JS DAN GIT (VERSION CONTROL SYSTEM UNTUK MENGELOLA SOURCE CODE YANG DIBUAT)
 
 
 inisialisasi project menggunakan node js
@@ -62,6 +62,22 @@ lakukan instalasi postman (tools untuk melakukan request ke API)
 
 
 
+
+SETUP GITHUB DAN TESTING BUILD
+
+Buat repository di github
+
+buat file gitignore untuk meng ignore / mempas file atau folder agar tidak di push pada repository GitHub
+
+/namafile => agar tidak di push
+
+1. dependencies => node_module
+2. testing => coverage
+3. production => build atau dist
+4. misc => DS_Store, .package-lock.json
+
+npm run build => digunakan untuk menjalankan envitonment production (membuild atau mengcompile ts menjadi js)
+npm run dev => digunakan untuk menjalankan environment developmen
 
 
 

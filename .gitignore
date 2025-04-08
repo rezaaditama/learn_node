@@ -1,0 +1,15 @@
+#file ini digunakan agar ketika project disimpan disebuah repository, file-file yang ada disini akan dikecualikan
+
+#Dependencies
+/node_module
+
+#Testing
+/coverage
+
+#Production
+/build
+/dist
+
+#Misc
+/DS_Store
+/.package-lock.json
