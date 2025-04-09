@@ -5,7 +5,7 @@ inisialisasi project menggunakan node js
 npm init
 
 instalasi typescript
-npm i -D typescript ts-node => perintah ini digunakan untuk melakukan instalasi typescript agar dapat berjalan pada tahap development bukan saat di build dan berjalan di production
+npm i -D typescript ts-node => perintah ini digunakan untuk melakukan instalasi typescript agar dapat berjalan pada tahap development bukan saat di build dan berjalan di production (build)
 
 Membuat konfigurasi typescript
 npx tsc --init => hasilnya akan membuat file tsconfig.json
@@ -22,7 +22,6 @@ kalau tidak dapat melakukan npx maka dibuat manual kemudian tambahkan :
 9. baseURL
 10. paths
 11. typeRoots
-
 kemudian tambahkan include (untuk memilih dimana saja menggunakan typescript) dan exclude (file yang tidak akan menggunakan typescript)
 
 buat folder src dan buat file index.ts (file ini akan diakses/dieksekusi)
@@ -78,6 +77,71 @@ buat file gitignore untuk meng ignore / mempas file atau folder agar tidak di pu
 
 npm run build => digunakan untuk menjalankan envitonment production (membuild atau mengcompile ts menjadi js)
 npm run dev => digunakan untuk menjalankan environment developmen
+
+
+SETUP ESLINT DAN PRETTIER
+ESLint => code analyzer yang dapat menemukan masalah atau problem yang ada di dalam code javascript ataupun typescript yang sudah support dengan banyak code editor yang ada
+
+instalasi eslint
+instalasi ESLint pada extention di vscode 
+inisialisasi eslint pada project => npx eslint --init => To check syntax, find problem and enforce code style
+instalasi dependencies => npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
+konfigurasi file eslint => tambahkan parser "@typescript-eslint/parser", hapus override, tambahkan plugins ["@typescript-eslint"], tambahkan ignorePatterns ["**/build/*", "**node_module/*", "**/public/* "]
+
+ignorePatterns => digunakan agar eslint tidak akan membaca folder atau file di dalamnya 
+
+Prettier => code formatter untuk mempermudah dalam penulisan code dalam typescript
+
+Instalasi Prettier
+Instalasi Prettier pada extention di vscode
+instalasi dependencies => npm i --save-dev --save-exact prettier
+buat file .prettierrc untuk melakukan konfigurasi
+buat object yang berisi :
+
+{
+	"arrowParents": "always",
+	"printWidth": 120,
+	"semi": false, => bisa tanpa titik koma
+	"singleQuote": true,
+	"trailingComma": "none"
+}  
+
+Kemudian masuk preferences => setting => search "format" => pilih prettier => pada bagian format on paste di ceklis
+Kemudian buat file .prettierignore => file yang tidak akan dirapihkan oleh prettier, kemudian masukkan
+1. eslintrc.json
+2. prettierrc.json
+3. package.json
+4. package-lock.json
+5. tsconfig.json
+6. CHANGELOG.md
+7. readme.md
+6. nodemon.json
+7. yarn.lock
+8. dist
+9. build
+10. public
+11. node_modules
+12. vercel.json
+
+tambahkan pada bagian scripts pada file package.json => "format": "prettier --write"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
