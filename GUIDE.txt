@@ -108,7 +108,7 @@ instalasi eslint
 instalasi ESLint pada extention di vscode 
 inisialisasi eslint pada project => npx eslint --init => To check syntax, find problem and enforce code style
 instalasi dependencies => npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
-konfigurasi file eslint => tambahkan parser "@typescript-eslint/parser", hapus override, tambahkan plugins ["@typescript-eslint"], tambahkan ignorePatterns ["**/build/*", "**node_module/*", "**/public/* "]
+konfigurasi file eslint => tambahkan parser "@typescript-eslint/parser", hapus override, tambahkan plugins ["@typescript-eslint"], tambahkan ignorePatterns ["**/build/*", "**node_module/*", "**/public/*", "**/tsconfig.json, "eslint.config.js"]
 
 ignorePatterns => digunakan agar eslint tidak akan membaca folder atau file di dalamnya 
 
