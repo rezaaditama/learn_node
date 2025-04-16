@@ -1,0 +1,31 @@
+#!/bin/sh
+
+#check prettier
+npm run check-format ||
+(
+    echo "Kesalahan pada format penulisan";
+    false;
+)
+
+#check eslint
+npm run check-lint ||
+(
+    echo "Kesalahan pada eslint";
+    false;
+)
+
+#check tsconfig
+npm run check-types ||
+(
+    echo "Kesalahan pada tipe data";
+    false;
+)
+
+#check build
+npm run build ||
+(
+    echo "Kesalahan pada saat melakukan build";
+    false;
+)
+
+echo "Commit telah selesai";

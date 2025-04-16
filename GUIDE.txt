@@ -1,6 +1,25 @@
 INSTALASI NODE JS DAN GIT (VERSION CONTROL SYSTEM UNTUK MENGELOLA SOURCE CODE YANG DIBUAT)
 
 
+node js merupakan sebuah runtime environment (lingkungan eksekusi) yang digunakan untuk menjalankan kode javascript di luar browser sehingga dapat berjalan di server atau di komputer yang berada pada backend Node js dapat digunakan untuk mengelola database, mengirim dan membuat API atau endpoint, membuat autentikasi login dan urusan server side lainnya
+
+cara kerja node js 
+1. sigle-threaded, non-blocking => multitasking dan asinkron
+2. event-driven architecture => node js tidak menunggu tugas selesai melainkan menjalankan tugas lain dan Kembali Ketika tugas sudah selesai (promise dan callback)
+3. skalabilitas tinggi => karena sifatnya yang single-threaded dan non-blocking (multitasking) sehingga cocok untuk aplikasi realtime
+
+npm i => untuk melakukan instalasi Utama (express, axios, cors)
+npm i -D => untuk sisi developer dan tidak di gunakan oleh user (eslint, typescript,vite, nodemon)
+npm i -G => untuk instalasi secara global di komputer tidak hanya satu proyek (nodemon, eslint)
+
+Butuh library buat dipakai saat aplikasi dijalankan => npm install nama
+Butuh alat bantu coding/building => npm install -D nama
+Butuh alat bisa diakses dari mana pun (global) => npm install -g nama
+
+npm digunakan untuk instalasi dan konfigurasi
+npx digunakan untuk menjalankan
+
+
 inisialisasi project menggunakan node js
 npm init
 
@@ -11,17 +30,17 @@ Membuat konfigurasi typescript
 npx tsc --init => hasilnya akan membuat file tsconfig.json
 
 kalau tidak dapat melakukan npx maka dibuat manual kemudian tambahkan :
-1. target (es2016) => mengatur versi dari Bahasa javascript
-2. module (commonjs)
-3. esModuleInterop (true)
-4. noImpliciyAny (true)
-5. moduleResolution (node)
+1. target (es2016) => mengatur versi dari Bahasa javascript versi ES2016
+2. module (commonjs) => Kode TypeScript kamu akan diubah ke JavaScript dengan format modul CommonJS (cara require() dan module.exports)
+3. esModuleInterop (true) => agar dapat menggunakan import from
+4. noImpliciyAny (true) => digunakan agar apabila kita tidak memberikan tipe variabel maka akan menghasilkan error (perbedaan js dan ts berada pada type variabelnya)
+5. moduleResolution (node) => TypeScript akan mencari dan menyelesaikan (resolve) file import dengan cara seperti Node.js
 6. resolveJsonModule (true) => memungkinkan untuk mengimport file json
-7. sourceMap (true)
+7. sourceMap (true) => digunakan untuk debugging javascript di browser/node, namun tetap dapat melihat versi typescriptnya
 8. outDir => out directory (mengarahkannya kemana)
-9. baseURL
-10. paths
-11. typeRoots
+9. baseURL => Menentukan folder dasar buat path import relative (bisa langsung folder tanpa ../../namafile)
+10. paths => Menentukan alias atau shortcut path
+11. typeRoots => Nunjuk ke folder tempat TypeScript nyari definisi tipe (.d.ts)
 kemudian tambahkan include (untuk memilih dimana saja menggunakan typescript) dan exclude (file yang tidak akan menggunakan typescript)
 
 buat folder src dan buat file index.ts (file ini akan diakses/dieksekusi)
@@ -31,14 +50,17 @@ buat script untuk menjalankan perintah pada terminal untuk menjalankan projek
 "dev" : "npx nodemon" => menjalankan nodemon
 "build" : "tsc"
 
+
+nodemon => sebuah tools yang digunakan pada nodejs yang memungkinkan project nodejs me-restart otomatis setiap kali ada perubahan (CTRL+S) sehingga tidak perlu mematikan server terlebih dahulu. Pada dasarnya nodemon itu bukan nodejs, melainkan nodemon digunakan untuk membantu kerja dari nodejs (library atau package)
+
 Lakukan instalasi nodemon
 npm i nodemon
 
 Buat file konfigurasi berupa object dengan nama nodemmon.json
 {
-"watch" : ["src"],
-"ext": "ts",
-"exec" : "npx ts-node ./src/index.ts"
+"watch" : ["src"], => nodemon akan mengawasi apabila ada perubahan, Ketika ada perubahan maka akan secara otomatis melakukan restart
+"ext": "ts", => tipe file yang akan diawasi oleh nodemon
+"exec" : "npx ts-node ./src/index.ts" => Ketika program dijalankan atau di restart Ketika ada perubahan maka akan menjalankan perintah berikut
 }  
 
 jadi Ketika memasukkan perintah dev maka akan membuka file nodemon.json kemudian nodemon akan langsung menjalankan perintah npx ts-node ./src/index.ts maka akan secara otomatis menjalankan file yang ada pada index.ts
@@ -124,6 +146,88 @@ Kemudian buat file .prettierignore => file yang tidak akan dirapihkan oleh prett
 12. vercel.json
 
 tambahkan pada bagian scripts pada file package.json => "format": "prettier --write"
+
+
+
+
+SETUP HUSKY PRECOMMIT
+
+husky berfungsi untuk memeriksa kode secara otomatis sebelum kode tersebut di simpan di repository git, Ketika ada kesalahan maka harus di perbaiki dahulu baru dapat melakukan commit. 
+
+linting adalah pengecekan ulang untuk menemukan kesalahan, bug atau gaya penulisan yang tidak sesuai
+
+formatting adalah penataan ulang struktur dan gaya penulisan kode agar lebih konsisten dan mudah di baca
+
+pretty quick berfungsi untuk sebuah utilitas untuk mengecek format secara otomatis file yang berubah atau file baru sebelum di commit.
+
+Lakukan instalasi husky dan pretty-quick => npm i -D husky pretty-quick
+lakukan konfigurasi husky di package.json => 
+"husky": {
+	"hooks": {
+		"pre-commit": "npx pretty-quick --staged ng lint ng test",
+		"pre-push": "ng build --aot true"
+		}
+	}
+
+
+pretty-quick --staged => untuk merapikan file yang akan di commit menggunakan prettier
+ng lint => digunakan untuk mengecek kode apakah sudah sesuai dengan format penulisan (linting)
+ng test => digunakan untuk memastikan tidak ada error
+
+lanjutkan instalasi husky di bagian script pada package.json
+"prepare": "husky install", => digunakan untuk mengaktifkan git hook menggunakan husky
+"check-types": "tsc --pretty --noEmit", => memeriksa apakah semua tipe data itu benar
+"check-format": "prettier --check", => memeriksa format kode
+"check-lint": "eslint . --ext ts --ext tsx --ext js" => menjalankan eslint untuk memeriksa kode js, ts, tsx dimulai dari folder ini (.)
+
+Jalankan husky pada terminal => npm run prepare (akan memunculkan folder .husky)
+
+Buat file pada folder .husky dengan nama pre-commit, kemudian ketikkan :
+#!/bin/sh => jalankan file ini menggunakan terminal windows powershell (shebang)
+. "$(dirname "$0")/_/husky.sh" => digunakan untuk mengaktifkan script bawaan husky agar perintah buat hook git dapat berjalan dengan benar 
+
+#check prettier
+npm run check-format || 
+(
+	echo "Pesan ini akan ditampilkan apabila terdapat kesalahan pada format penulisan";
+	false;
+)
+
+#check eslint
+npm run check-lint || 
+(
+	echo "Pesan ini akan menampilkan titik kesalahannya";
+	false;
+)
+
+
+#check tsconfig
+npm run check-types ||
+(
+	echo "Pesan ini akan tampil apabila ada kesalahan pada tipe data";
+	false;
+)
+
+npm run build || 
+(
+	echo "Pesan ini akan muncul apabila build gagal";
+	false;
+)
+
+echo "Pesan ini akan muncul apabila commit telah selesai atau sukses"
+
+
+
+
+$(dirname "$0") → Mendapatkan direktori tempat file ini berada.
+_/husky.sh → File ini adalah bagian dari Husky, berisi perintah dasar untuk menjalankan hook.
+Titik (.) di awal baris → Artinya "jalankan skrip ini di shell saat ini"
+
+
+
+
+
+
 
 
 
